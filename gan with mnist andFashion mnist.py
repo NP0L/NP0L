@@ -21,7 +21,7 @@ M = 100
 TRAIN_SAMPLES = 50000
 TEST_SAMPLES = 10000
 
-EPOCHS = 100
+EPOCHS = 1
 BATCH_SIZE = 64
 
 LEARNING_RATE = 0.0002
@@ -401,47 +401,24 @@ print("Average NMSE (dB):", np.mean(NMSE_dB_values))
 # 15. DISPLAY ORIGINAL AND RECONSTRUCTED IMAGES
 # =====================================================
 
-number_of_images = 5
+image_number = 27
 
-plt.figure(figsize=(15, 5))
+# Display original image
+plt.figure(figsize=(8, 4))
 
-for i in range(number_of_images):
+plt.subplot(1, 2, 1)
+plt.imshow(x_test[image_number].reshape(28, 28), cmap='gray')
+plt.title("Original Image")
+plt.axis("off")
 
-    plt.subplot(2, number_of_images, i + 1)
-
-    plt.imshow(
-        x_test[i].reshape(28, 28),
-        cmap="gray",
-        vmin=0,
-        vmax=1
-    )
-
-    plt.title("Original")
-    plt.axis("off")
-
-    plt.subplot(
-        2,
-        number_of_images,
-        number_of_images + i + 1
-    )
-
-    plt.imshow(
-        reconstructed[i].reshape(28, 28),
-        cmap="gray",
-        vmin=0,
-        vmax=1
-    )
-
-    plt.title("Reconstructed")
-    plt.axis("off")
+# Display reconstructed image
+plt.subplot(1, 2, 2)
+plt.imshow(reconstructed[image_number].reshape(28, 28), cmap='gray')
+plt.title("Reconstructed Image")
+plt.axis("off")
 
 plt.tight_layout()
-
-plt.savefig(
-    os.path.join(OUTPUT_PATH, "GAN_Reconstruction.png"),
-    dpi=200
-)
-
+plt.savefig(os.path.join(OUTPUT_PATH, "Selected_Reconstruction.png"))
 plt.show()
 
 # =====================================================
